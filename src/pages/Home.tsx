@@ -36,9 +36,7 @@ const SearchPage: React.FC = () => {
 		}
 	}, [searchTerm, page]);
 
-	useEffect(() => {
-		fetchMovies();
-	}, [searchTerm, fetchMovies]);
+	
 
 	return (
 		<div className={styles.container}>

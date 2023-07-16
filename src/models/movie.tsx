@@ -55,3 +55,9 @@ export interface MoviePage {
 	entries: number;
 	results: Movie[];
 }
+
+export interface Ratings {
+	tconst: string;
+	averageRating: number;
+	numVotes: number;
+}
