@@ -1,0 +1,30 @@
+.skeletonWrapper {
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+  background: red;
+}
+
+.skeletonTitle,
+.skeletonDetails,
+.skeletonImage {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.skeletonTitle {
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.skeletonDetails {
+  height: 15px;
+  width: 70%;
+  margin-bottom: 10px;
+}
+
+.skeletonImage {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}

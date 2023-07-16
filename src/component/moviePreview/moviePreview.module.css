@@ -1,0 +1,9 @@
+.roundedCard {
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(to right, #ff9a9e, #fad0c4) border-box;
+  border: 4px solid transparent;
+  background-clip: padding-box, border-box;
+}
+.roundedCard {
+  border-radius: 10px;
+}
