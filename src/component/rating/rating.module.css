@@ -1,0 +1,61 @@
+:root{
+  --progress-:calc(20*3.6deg);
+}
+body{
+  background:#222;
+}
+.container{
+  display:inline-flex;
+  flex-direction:column;
+  justify-content:space-around;
+  align-items:center;
+
+  
+}
+
+
+.proressBg{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:5rem;
+  height:5rem;
+  border-radius:50%;
+  background-color: #204529	;
+  background-image: 
+    radial-gradient(circle, #081C22 1rem, #081C22 2rem, transparent 1rem), conic-gradient(#21D07A 0deg, #21D07A var(--progress-), transparent 30deg);
+   
+}
+
+.progressTxt{
+  color:#A5D7E8;
+  font-size:clamp(1rem,5vh,2rem);
+  animation: rotateText 3s ease;
+}
+
+@keyframes move-background{
+  to{
+      transform:rotate(360deg);
+  }
+  
+}
+
+@keyframes rotateText{
+  to{
+    
+  transform: rotate(-360deg);
+      
+  }
+}
+input[type="number"] {
+  
+  border: none;
+  background-color: #A5D7E8;
+  padding: 1rem;
+  font-size: 1rem;
+  width: 30%;
+  border-radius:.25rem;
+}
+
+
+

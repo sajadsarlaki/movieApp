@@ -1,0 +1,45 @@
+
+
+.container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+    height: 100vh;
+}
+
+
+.mainBackground {
+	width: 100%;
+    height: 100vh;
+
+	border-bottom: 1px solid var(--primaryColor);
+	background-position: left calc((20vw - 170px) - 340px) top calc(-(50vw - 170px) + 340px);
+	background-size: cover;
+	/* background-size: 500px; */
+	background-repeat: no-repeat;
+	/* background-image: url(/t/p/w1920_and_h800_multi_faces/aQ05QNSEersEdOzaqdjnrkqxZXE.jpg) */
+}
+.mainContent {
+    height: 100vh;
+
+	background-image: linear-gradient(
+		to right,
+		rgba(31.5, 31.5, 52.5, 1) calc((50vw - 170px) - 340px),
+		rgba(31.5, 31.5, 52.5, 0.84) 50%,
+		rgba(31.5, 31.5, 52.5, 0.84) 100%
+	);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.movieImage {
+	width: 20%;
+	margin: 2rem;
+	border-radius: 0.5rem;
+}
+
+.inline{
+    display: inline;
+}
