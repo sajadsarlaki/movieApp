@@ -46,8 +46,10 @@ const SearchPage: React.FC = () => {
 										movie.primaryImage ? movie.primaryImage.url : "default.jpg"
 									}
 									alt={movie.titleText.text}
-									width={movie.primaryImage ? movie.primaryImage.width : 100}
-									height={movie.primaryImage ? movie.primaryImage.height : 100}
+									width={100}
+									height={ 100}
+                                    // width={movie.primaryImage ? movie.primaryImage.width : 100}
+									// height={movie.primaryImage ? movie.primaryImage.height : 100}
 								/>
 							</div>
 						</Link>
