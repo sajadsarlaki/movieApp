@@ -1,22 +1,43 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Movie, MoviePage } from '../models/movie';  // replace with path to your model file
-import { searchForMovies } from '../api';
+import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { Movie, MoviePage } from "../models/movie"; // replace with path to your model file
+import { searchForMovies } from "../api";
 
 const SearchPage: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [movies, setMovies] = useState<Movie[]>([]);  // Type the movies state using the Movie array type
+	const [searchTerm, setSearchTerm] = useState("");
+	const [movies, setMovies] = useState<Movie[]>([]);
+	const [page, setPage] = useState(1);
 
-  const fetchMovies = async () => {
-    try {
-      const moviesData: MoviePage = await searchForMovies(searchTerm);  // Type the API response using the MoviePage type
-      setMovies(moviesData.results);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+	const fetchMovies = useCallback(async () => {
+		try {
+			const moviesData: MoviePage = await searchForMovies(searchTerm, 1, 5);
+			setMovies(moviesData.results);
+			setPage(1);
+		} catch (error) {
+			console.error(error);
+		}
+	}, [searchTerm]);
 
-  return (
+	const fetchMoreMovies = useCallback(async () => {
+		try {
+			const nextPage = page + 1;
+			const moreMoviesData: MoviePage = await searchForMovies(
+				searchTerm,
+				nextPage,
+				5
+			);
+			setMovies((prevMovies) => [...prevMovies, ...moreMoviesData.results]);
+			setPage((prevPage) => prevPage + 1);
+		} catch (error) {
+			console.error(error);
+		}
+	}, [searchTerm, page]);
+
+	useEffect(() => {
+		fetchMovies();
+	}, [searchTerm, fetchMovies]);
+
+	return (
 		<div>
 			<input
 				type="text"
@@ -27,15 +48,22 @@ const SearchPage: React.FC = () => {
 
 			<button onClick={fetchMovies}>Search</button>
 
-			<div>
+			<div
+				style={{
+					display: "grid",
+					gridTemplateColumns: "1fr 1fr 1fr",
+					gridTemplateRows: "1fr 1fr 1fr",
+					gap: "1rem",
+					overflow: "scroll",
+				}}
+			>
 				{movies.map(
 					(
 						movie: Movie // Type the movie parameter using the Movie type
 					) => (
 						<Link key={movie._id} to={`/movie/${movie.id}`}>
-							<div>
+							<div style={{ border: "1px solid" }}>
 								<h2>{movie.titleText.text}</h2>
-								<h3>{movie.originalTitleText.text}</h3>
 								<p>{`${movie.titleType.text} - ${
 									movie.releaseYear
 										? movie.releaseYear.year
@@ -47,15 +75,19 @@ const SearchPage: React.FC = () => {
 									}
 									alt={movie.titleText.text}
 									width={100}
-									height={ 100}
-                                    // width={movie.primaryImage ? movie.primaryImage.width : 100}
-									// height={movie.primaryImage ? movie.primaryImage.height : 100}
+									height={100}
 								/>
+								<p>
+									{`${movie.releaseDate?.day}/ 
+										${movie.releaseDate?.month}/
+										${movie.releaseDate?.year}`}
+								</p>
 							</div>
 						</Link>
 					)
 				)}
 			</div>
+			<button onClick={fetchMoreMovies}>Load More</button>
 		</div>
 	);
 };

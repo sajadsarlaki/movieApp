@@ -51,7 +51,7 @@ export interface Movie {
 
 export interface MoviePage {
 	page: number;
-	next: number | null;
+	next: string | null;
 	entries: number;
 	results: Movie[];
 }
