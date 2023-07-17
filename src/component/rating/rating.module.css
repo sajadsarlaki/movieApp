@@ -30,7 +30,7 @@ body{
 .progressTxt{
   color:#A5D7E8;
   font-size:clamp(1rem,5vh,2rem);
-  animation: rotateText 3s ease;
+  animation: magnify 3s ease;
 }
 
 @keyframes move-background{
@@ -40,12 +40,13 @@ body{
   
 }
 
-@keyframes rotateText{
+@keyframes magnify{
   to{
     
-  transform: rotate(-360deg);
+  transform: scale(1.2);
       
   }
+  
 }
 input[type="number"] {
   

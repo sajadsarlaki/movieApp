@@ -52,7 +52,6 @@ input[type=text]:focus{
     outline:2px #222 solid ;
 }
 .searchBtn{
-
     height: calc(3rem + 1px);
     padding: .5rem 2rem;
     border: 1px solid #fff;
@@ -71,13 +70,15 @@ input[type=text]:focus{
     justify-content: center;
     
 }
-.list{
+.list {
     width: 65%;
-    display: grid;
-    grid-template-columns: repeat(7,minmax(0,1fr));
-    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
-.list > a{
-    padding: 1rem;
-    /* max-width: 20%; */
+
+.list > * {
+    flex: 1 0 200px 150px;
+    margin: 1rem;
+    box-sizing: border-box;
 }

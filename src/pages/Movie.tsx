@@ -4,7 +4,7 @@ import { Movie, Ratings } from "../models/movie"; // replace with path to your m
 import { getMovie, getRatings, getCrew, getMainActors } from "../api";
 import styles from "./movie.module.css";
 import RatingComponent from "../component/rating/RatingComponent";
-
+import SkeletonLoader from "../component/skeleton/SkeletonLoader";
 
 const MoviePage: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
@@ -28,11 +28,12 @@ const MoviePage: React.FC = () => {
 			// setMainActors(mainActorsData);
 		};
 
-		fetchData();
+		setTimeout(() => fetchData(), 2000);
 	}, [id]);
 
 	if (!movie) {
-		return <h2>Loading...</h2>;
+		// return <h2>Loading...</h2>;
+		return <SkeletonLoader />; // Use SkeletonLoader
 	}
 
 	return (
@@ -76,15 +77,19 @@ const MoviePage: React.FC = () => {
 						</p> */}
 						<RatingComponent rate={ratings?.averageRating || 0} />
 						<br />
-						<h3 className={styles.inline}>Out of:</h3>{" "}
-						{ratings?.numVotes || 0 } vote
-						<br />
-						<h3 className={styles.inline}>Crew:</h3>
-						<span>{crew ? crew.join("-") : " not mentioned!"}</span> <br />
 						<h3 className={styles.inline}>
-							Main Actors:{" "}
+							<span>Out of: {ratings?.numVotes || 0} vote</span>
 						</h3>
-						{mainActors ? mainActors.join("-") : "not mentioned!"}
+						<h3 className={styles.inline}>
+							Crew:
+							<span>{crew ? crew.join("-") : " not mentioned!"}</span> <br />
+						</h3>
+						<h3 className={styles.inline}>
+							Main Actors:
+							<span>
+								{mainActors ? mainActors.join("-") : " not mentioned!"}
+							</span>
+						</h3>
 					</div>
 				</div>
 			</div>

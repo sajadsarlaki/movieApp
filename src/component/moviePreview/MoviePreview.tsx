@@ -9,9 +9,9 @@ interface MoviePreviewProps {
 }
 
 const MoviePreview: React.FC<MoviePreviewProps> = ({ movie }) => {
-	if (!movie) {
-		return <SkeletonLoader />;
-	}
+	// if (!movie) {
+	// 	return <SkeletonLoader />;
+	// }
 
 	const {day, month, year} = movie.releaseDate || 0;
 	return (

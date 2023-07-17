@@ -1,0 +1,33 @@
+
+
+.moviePreview {
+    width: 200px; /* Take up full width of the flex item */
+    height: 400px;
+    display: flex; /* Use flexbox for child elements */
+    flex-direction: column; /* Stack child elements vertically */
+    justify-content: center; /* Center child elements vertically */
+    align-items: center; /* Center child elements horizontally */
+}
+
+.poster, .title {
+    width: 100%; /* Take up 80% of the width of the .moviePreview element */
+    border-radius: .5rem;
+    animation: skeleton-loading 1.5s linear alternate infinite;
+}
+
+.poster {
+    height: 200px;
+}
+
+.title {
+    height: 50px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: #ccc;
+    }
+    100% {
+        background-color: #eee;
+    }
+}

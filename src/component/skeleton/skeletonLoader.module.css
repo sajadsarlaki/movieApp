@@ -1,30 +1,70 @@
-.skeletonWrapper {
-  border: 1px solid #ccc;
-  padding: 10px;
-  box-sizing: border-box;
-  background: red;
+.skeletonContainer {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+    height: 100vh;
+
+
 }
 
-.skeletonTitle,
-.skeletonDetails,
-.skeletonImage {
-  background: #ccc;
-  border-radius: 4px;
+
+.skeletonMainBackground {
+	width: 100%;
+    height: 100vh;
+    background-color: black;
+	
+}
+.skeletonContent {
+    height: 100vh;
+
+	background-image: linear-gradient(
+		to right,
+		rgba(31.5, 31.5, 52.5, 1) calc((50vw - 170px) - 340px),
+		rgba(31.5, 31.5, 52.5, 0.84) 50%,
+		rgba(31.5, 31.5, 52.5, 0.84) 100%
+	);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  /* background-color: yellow; */
+}
+.skeletonMovieImage {
+	width: 20%;
+  height: 50vh;
+	margin: 2rem;
+	border-radius: 0.5rem;
+  background-color: #0003;
+    animation: skeleton-loading 1.5s linear infinite alternate;
+
 }
 
-.skeletonTitle {
-  height: 20px;
-  margin-bottom: 10px;
+.skeletonTitle, .skeletonRating, .skeletonVotes,  .skeletonActors, .skeletonCrew{
+  width: 10rem;
+  height: 2rem;
+    background-color: #0003;
+    animation: skeleton-loading 1.5s linear infinite alternate;
+
+}
+.skeletonRating{
+  width: 5rem;
+  height: 5rem;
+  border-radius: 5rem;
+}
+.skeletonDetails{
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.skeletonDetails {
-  height: 15px;
-  width: 70%;
-  margin-bottom: 10px;
-}
-
-.skeletonImage {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
+@keyframes skeleton-loading {
+  0% {
+    background-color: #222;
+  }
+  100% {
+    background-color: #333;
+  }
 }
