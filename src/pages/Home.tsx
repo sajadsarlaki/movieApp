@@ -1,65 +1,78 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Movie, MoviePage } from "../models/movie"; // replace with path to your model file
-import { searchForMovies } from "../api";
+import { searchForMovies, getUpcomingMovies } from "../api";
 import SkeletonLoader from "../component/skeleton/SkeletonLoader";
 import MoviePreview from "../component/moviePreview/MoviePreview";
-import styles from "./home.module.css"
+import styles from "./home.module.css";
 
 const SearchPage: React.FC = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [movies, setMovies] = useState<Movie[]>([]);
 	const [page, setPage] = useState(1);
 
-	const fetchMovies = useCallback(async () => {
+	const fetchMovies = useCallback(async (term:string, pg:number) => {
 		try {
-			const moviesData: MoviePage = await searchForMovies(searchTerm, 1, 5);
+			const moviesData: MoviePage = term === "" ? await getUpcomingMovies(pg + 3,7) : await searchForMovies(term, pg, 7);
 			setMovies(moviesData.results);
-			setPage(1);
+			setPage(pg);
 		} catch (error) {
 			console.error(error);
 		}
-	}, [searchTerm]);
+	}, []);
 
 	const fetchMoreMovies = useCallback(async () => {
 		try {
 			const nextPage = page + 1;
-			const moreMoviesData: MoviePage = await searchForMovies(
-				searchTerm,
-				nextPage,
-				5
-			);
+						const moreMoviesData: MoviePage =
+							searchTerm === ""
+								? await getUpcomingMovies(nextPage, 7)
+								: await searchForMovies(searchTerm, nextPage, 7);
+
 			setMovies((prevMovies) => [...prevMovies, ...moreMoviesData.results]);
-			setPage((prevPage) => prevPage + 1);
+			setPage(nextPage);
 		} catch (error) {
 			console.error(error);
 		}
 	}, [searchTerm, page]);
 
-	
+	useEffect(() => {
+		fetchMovies("", 1);
+	}, [fetchMovies]);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.inputSection}>
-				<input
-					className={styles.input}
-					type="text"
-					value={searchTerm}
-					onChange={(e) => setSearchTerm(e.target.value)}
-					placeholder="Search for a movie"
-				/>
+			<div className={styles.searchArea}>
+				<h2>Welcome.</h2>
+				<h3> Millions of Movies to discover. Explore More</h3>
+				<div className={styles.inputSection}>
+					<input
+						className={styles.input}
+						type="text"
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e.target.value)}
+						placeholder="Search for a movie"
+					/>
 
-				<button onClick={fetchMovies}>Search</button>
+					<button
+						className={styles.searchBtn}
+						onClick={() => fetchMovies(searchTerm, 1)}
+					>
+						Search
+					</button>
+				</div>
 			</div>
 
 			<div className={styles.mainContent}>
-				{movies === null
-					? Array(9).fill(<SkeletonLoader />)
-					: movies.map((movie) => (
-							<MoviePreview key={movie._id} movie={movie} />
-					  ))}
-			</div>
+				<div className={styles.list}>
+					{movies.length === 0
+						? Array(9).fill(<SkeletonLoader />)
+						: movies.map((movie) => (
+								<MoviePreview key={movie.id} movie={movie} />
+						  ))}
+				</div>
 			<button onClick={fetchMoreMovies}>Load More</button>
+			</div>
 		</div>
 	);
 };

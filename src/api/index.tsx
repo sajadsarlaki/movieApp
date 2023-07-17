@@ -133,3 +133,31 @@ export const getMainActors = async (id: string | undefined) => {
 		throw error;
 	}
 };
+
+export const getUpcomingMovies = async (
+	page: number,
+	limit: number) => {
+		const endpoint = "/titles/x/upcoming";
+		const options = {
+			method: "GET",
+			url: endpoint,
+			params: {
+				page: page.toString(),
+				limit: limit.toString(),
+				titleType: "movie",
+			},
+			headers: {
+				"X-RapidAPI-Key": "b7be69dfc3mshd4902f9ba61ec88p1bd0d8jsncfb3fd547613",
+				"X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com",
+			},
+			
+		};
+
+		try {
+			const response = await axios.request<MoviePage>(options);
+			return response.data;
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
+	}

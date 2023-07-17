@@ -13,20 +13,25 @@ const MoviePreview: React.FC<MoviePreviewProps> = ({ movie }) => {
 		return <SkeletonLoader />;
 	}
 
+	const {day, month, year} = movie.releaseDate || 0;
 	return (
-		<div className={`${styles.moviePreview} ${styles.roundedCard}`}>
-			<Link to={`/movie/${movie.id}`}>
+		<Link to={`/movie/${movie.id}`}>
+			<div className={styles.moviePreview}>
 				<img
-					src={movie.primaryImage?.url}
+					src={
+						movie.primaryImage
+							? movie.primaryImage.url
+							: "/assets/imgs/Movie-Placeholder.jpg"
+					}
 					alt={movie.titleText.text}
 					className={styles.poster}
-					width={100}
-					height={100}
+					width={300}
+					height={300}
 				/>
-				<h2 className={styles.title}>{movie.titleText.text}</h2>
-				<p className={styles.releaseYear}>{movie.releaseYear?.year}</p>
-			</Link>
-		</div>
+				<h2 className={styles.title}>{movie.originalTitleText.text}</h2>
+				<p className={styles.releaseYear}>{day&& day +"/"}{month && month + "/"}{year}</p>
+			</div>
+		</Link>
 	);
 };
 
