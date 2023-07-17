@@ -18,8 +18,8 @@ const SearchPage: React.FC = () => {
 		try {
 			const moviesData: MoviePage =
 				term === ""
-					? await getUpcomingMovies(pg, 7)
-					: await searchForMovies(term, pg, 7);
+					? await getUpcomingMovies(pg, 9)
+					: await searchForMovies(term, pg, 9);
 			setMovies(moviesData.results);
 			setPage(pg);
 		} catch (error) {
@@ -35,8 +35,8 @@ const SearchPage: React.FC = () => {
 			const nextPage = page + 1;
 			const moreMoviesData: MoviePage =
 				searchTerm === ""
-					? await getUpcomingMovies(nextPage, 7)
-					: await searchForMovies(searchTerm, nextPage, 7);
+					? await getUpcomingMovies(nextPage, 9)
+					: await searchForMovies(searchTerm, nextPage, 9);
 
 			setMovies((prevMovies) => [...prevMovies, ...moreMoviesData.results]);
 			setPage(nextPage);
@@ -78,7 +78,7 @@ const SearchPage: React.FC = () => {
 			<div className={styles.mainContent}>
 				<div className={styles.list}>
 					{isLoading &&
-						Array.from({ length: 7 }).map((_, index) => (
+						Array.from({ length: 9 }).map((_, index) => (
 							<div key={index}>
 								<MoviePreviewSkeleton />
 							</div>
@@ -90,13 +90,13 @@ const SearchPage: React.FC = () => {
 							</div>
 						))}
 					{isFetchingMore &&
-						Array.from({ length: 7 }).map((_, index) => (
+						Array.from({ length: 9 }).map((_, index) => (
 							<div key={index}>
 								<MoviePreviewSkeleton />
 							</div>
 						))}
 				</div>
-				<button onClick={fetchMoreMovies}>Load More</button>
+				<button onClick={fetchMoreMovies} className={styles.loadMoreBtn}>Load More</button>
 			</div>
 		</div>
 	);

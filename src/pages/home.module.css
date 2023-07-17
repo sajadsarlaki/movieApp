@@ -1,7 +1,17 @@
 .container{
     width: 100%;
     min-height: 100vh;
-    background-color: #fff;
+     background-image: 
+    radial-gradient(
+      circle at center,
+      #E5EBEF .1rem,
+      transparent .1rem),
+    radial-gradient(
+      circle at center,
+      #E5EBEF .2rem,
+      transparent .2rem);
+  background-size: 2rem 2rem, 4rem 4rem;
+  background-color: #fafafa;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -61,6 +71,9 @@ input[type=text]:focus{
     top: 0;
     right: -1px;
     color: #fff;
+        cursor: pointer;
+
+
 }
 
 .mainContent{
@@ -68,7 +81,7 @@ input[type=text]:focus{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+    position: relative;
 }
 .list {
     width: 65%;
@@ -81,4 +94,23 @@ input[type=text]:focus{
     flex: 1 0 200px 150px;
     margin: 1rem;
     box-sizing: border-box;
+}
+
+.loadMoreBtn{
+    position: absolute;
+    bottom: 1rem;
+    margin: 2rem;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: .5rem;
+    background: #0F2E67;
+    color: #fff;
+    font-size:1.2rem;
+    transition: transform .3s linear;
+
+}
+.loadMoreBtn:hover{
+    transform: scale(1.2)
+    
 }
