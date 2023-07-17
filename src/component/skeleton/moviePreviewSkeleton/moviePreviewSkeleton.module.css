@@ -31,3 +31,10 @@
         background-color: #333;
     }
 }
+@media (max-width: 480px) {
+    .moviePreview{
+        width: 90vw;
+        align-self: center;
+        justify-content: center;
+    }
+}

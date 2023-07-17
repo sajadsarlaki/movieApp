@@ -124,6 +124,8 @@ input[type="text"]:focus {
 @media (max-width: 768px) {
 	.searchArea {
 		width: 100%;
+        margin: 0;
+        padding: 0;
 	}
 
 	.inputSection {
@@ -134,6 +136,8 @@ input[type="text"]:focus {
 @media (max-width: 480px) {
 	.searchArea {
 		width: 100%;
+        margin: 0;
+        padding: 0;
 	}
 
 	.searchArea > h2 {
